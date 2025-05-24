@@ -10,79 +10,184 @@ export default function ServicesSection() {
     queryKey: ["/api/content/services"],
   });
 
-  const serviceItems = [
-    {
-      title: "Content Marketing",
-      description: "Strategic content creation that drives engagement and builds lasting brand connections through compelling storytelling.",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Social Media Marketing", 
-      description: "Dynamic social campaigns that amplify your message across all platforms with authentic brand voice.",
-      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Email Marketing",
-      description: "Personalized email campaigns that nurture leads and drive conversions through targeted messaging.",
-      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Influencer Marketing",
-      description: "Strategic partnerships with key influencers to expand reach and build authentic brand advocacy.",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Video Marketing",
-      description: "Compelling video content that tells your story and engages audiences across all digital platforms.",
-      image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Analytics & Reporting",
-      description: "Data-driven insights that optimize campaign performance and maximize return on investment.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop"
-    }
-  ];
-
   return (
-    <section id="services" className="py-20 bg-gray-50">
+    <section id="services" className="py-32 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Services List */}
-        <div className="space-y-6 mb-20">
-          {(services && services.length > 0 ? services : serviceItems).map((service, index) => (
-            <div key={service.id || index} className="flex items-center justify-between py-6 border-b border-gray-200 group">
-              <div className="flex-1">
-                <h3 className="text-2xl md:text-3xl font-light text-black group-hover:text-gray-600 transition-colors duration-300">
-                  {service.title}
-                </h3>
-              </div>
-              <div className="flex items-center space-x-8">
-                <p className="text-gray-600 max-w-md text-right hidden lg:block">
-                  {service.description}
+        {/* Header */}
+        <div className="grid lg:grid-cols-2 gap-16 mb-24">
+          <div>
+            <h2 className="text-6xl md:text-7xl font-light text-black mb-8 leading-none">
+              Services
+            </h2>
+            <p className="text-xl text-gray-600 leading-relaxed">
+              We specialize in creating compelling visual narratives that elevate brands and connect with audiences through the art of storytelling.
+            </p>
+          </div>
+          <div className="lg:pt-16">
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-sm text-gray-500 uppercase tracking-wider mb-2">Our Approach</h3>
+                <p className="text-gray-700">
+                  Every project begins with understanding your story, your audience, and your goals. We combine creative vision with strategic thinking to deliver results that matter.
                 </p>
-                <div className="w-20 h-20 rounded-lg overflow-hidden">
-                  <img
-                    src={service.image || serviceItems[index % serviceItems.length].image}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+              </div>
+              <div>
+                <h3 className="text-sm text-gray-500 uppercase tracking-wider mb-2">Process</h3>
+                <p className="text-gray-700">
+                  From concept development through post-production, we maintain close collaboration to ensure your vision is realized with the highest production value.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Services List */}
+        {services && services.length > 0 ? (
+          <div className="space-y-16">
+            {services.map((service, index) => (
+              <div key={service.id} className="border-b border-gray-200 pb-16 last:border-b-0">
+                <div className="grid lg:grid-cols-3 gap-12 items-start">
+                  <div>
+                    <div className="flex items-baseline gap-4 mb-4">
+                      <span className="text-sm text-gray-400 font-mono">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <h3 className="text-3xl font-light text-black">
+                        {service.title}
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="lg:col-span-2">
+                    <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                      {service.description || "Professional video production services tailored to your specific needs and creative vision."}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                        Pre-Production
+                      </span>
+                      <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                        Production
+                      </span>
+                      <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                        Post-Production
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-16">
+            <div className="border-b border-gray-200 pb-16">
+              <div className="grid lg:grid-cols-3 gap-12 items-start">
+                <div>
+                  <div className="flex items-baseline gap-4 mb-4">
+                    <span className="text-sm text-gray-400 font-mono">01</span>
+                    <h3 className="text-3xl font-light text-black">Commercial Production</h3>
+                  </div>
+                </div>
+                <div className="lg:col-span-2">
+                  <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                    High-impact commercials that drive results and connect with your audience through compelling storytelling and premium production value.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                      Concept Development
+                    </span>
+                    <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                      Filming
+                    </span>
+                    <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                      Post-Production
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
 
-        {/* Bottom CTA Section */}
-        <div className="bg-purple-900 rounded-2xl p-12 text-center text-white relative overflow-hidden">
-          <div className="relative z-10">
-            <h3 className="text-3xl md:text-4xl font-light mb-4">
-              A new
-            </h3>
-            <p className="text-lg text-purple-200 max-w-2xl mx-auto leading-relaxed">
-              Ready to transform your brand's story? Let's create something extraordinary together that will captivate your audience and drive meaningful results.
-            </p>
+            <div className="border-b border-gray-200 pb-16">
+              <div className="grid lg:grid-cols-3 gap-12 items-start">
+                <div>
+                  <div className="flex items-baseline gap-4 mb-4">
+                    <span className="text-sm text-gray-400 font-mono">02</span>
+                    <h3 className="text-3xl font-light text-black">Brand Films</h3>
+                  </div>
+                </div>
+                <div className="lg:col-span-2">
+                  <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                    Compelling brand narratives that showcase your company's story, values, and vision with cinematic quality and emotional depth.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                      Brand Strategy
+                    </span>
+                    <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                      Storytelling
+                    </span>
+                    <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                      Distribution
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-b border-gray-200 pb-16">
+              <div className="grid lg:grid-cols-3 gap-12 items-start">
+                <div>
+                  <div className="flex items-baseline gap-4 mb-4">
+                    <span className="text-sm text-gray-400 font-mono">03</span>
+                    <h3 className="text-3xl font-light text-black">Documentary</h3>
+                  </div>
+                </div>
+                <div className="lg:col-span-2">
+                  <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                    Authentic documentaries that capture real stories with journalistic integrity and cinematic artistry to create lasting impact.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                      Research
+                    </span>
+                    <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                      Interviews
+                    </span>
+                    <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                      Editing
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div className="grid lg:grid-cols-3 gap-12 items-start">
+                <div>
+                  <div className="flex items-baseline gap-4 mb-4">
+                    <span className="text-sm text-gray-400 font-mono">04</span>
+                    <h3 className="text-3xl font-light text-black">Music Videos</h3>
+                  </div>
+                </div>
+                <div className="lg:col-span-2">
+                  <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                    Creative music videos that bring artists' visions to life with innovative concepts, dynamic visuals, and memorable storytelling.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                      Creative Direction
+                    </span>
+                    <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                      Performance
+                    </span>
+                    <span className="px-3 py-1 bg-white rounded-full text-sm text-gray-600 border border-gray-200">
+                      Color Grading
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-900 to-purple-800 opacity-90"></div>
-        </div>
+        )}
       </div>
     </section>
   );
