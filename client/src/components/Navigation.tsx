@@ -19,7 +19,7 @@ export default function Navigation({ showAdminLink }: NavigationProps) {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A]/90 backdrop-blur-md border-b border-gray-800/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
@@ -69,14 +69,7 @@ export default function Navigation({ showAdminLink }: NavigationProps) {
             )}
           </div>
           
-          <div className="hidden md:block">
-            <Button 
-              onClick={() => scrollToSection('contact')}
-              className="bg-[#00D4FF] hover:bg-[#00D4FF]/80 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
-            >
-              Start Project
-            </Button>
-          </div>
+
           
           <button 
             className="md:hidden text-white"
@@ -127,12 +120,7 @@ export default function Navigation({ showAdminLink }: NavigationProps) {
                   </span>
                 </Link>
               )}
-              <Button 
-                onClick={() => scrollToSection('contact')}
-                className="bg-[#00D4FF] hover:bg-[#00D4FF]/80 text-white w-full mt-4"
-              >
-                Start Project
-              </Button>
+
             </div>
           </div>
         )}

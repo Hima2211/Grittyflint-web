@@ -40,18 +40,7 @@ export default function HeroSection() {
             </span>
           </h1>
           
-          {/* CTA Button */}
-          <div className="mt-8">
-            <Button
-              onClick={scrollToPortfolio}
-              variant="outline"
-              size="lg"
-              className="border-2 border-white text-white hover:bg-white hover:text-black px-6 py-3 text-base font-medium rounded-none uppercase tracking-wider transition-all duration-300"
-            >
-              View Projects
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
+
         </div>
       </div>
       
