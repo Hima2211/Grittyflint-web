@@ -25,9 +25,16 @@ export default function HeroSection() {
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69fabf25b48f40b3f50b80b3e8da96736&profile_id=165&oauth2_token_id=57447761" type="video/mp4" />
-          {/* Fallback image if video doesn't load */}
+          <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+          {/* Fallback to background image */}
         </video>
+        {/* Fallback background image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80')`
+          }}
+        ></div>
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/50"></div>
       </div>
