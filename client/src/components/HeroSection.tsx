@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function HeroSection() {
   const { data: heroContent } = useQuery({
@@ -14,58 +14,56 @@ export default function HeroSection() {
     }
   };
 
-  const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Cinematic background */}
-      <div className="absolute inset-0 w-full h-full">
-        <img 
-          src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&h=1125" 
-          alt="Cinematic film production with dramatic lighting and camera equipment" 
-          className="w-full h-full object-cover" 
-        />
-        <div className="absolute inset-0 video-overlay"></div>
+    <section id="home" className="relative min-h-screen flex items-center justify-start overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80')`
+        }}
+      >
+        {/* Subtle overlay */}
+        <div className="absolute inset-0 bg-black/30"></div>
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 hero-text-gradient animate-fade-in-up">
-          {heroContent?.title || "Transforming Visions into"}
-          <br />
-          <span className="text-[#00D4FF]">
-            {heroContent?.content || "Cinematic Success"}
-          </span>
-        </h1>
-        
-        <p className="text-xl md:text-2xl text-[#A1A1AA] mb-8 max-w-3xl mx-auto animate-fade-in-up" style={{animationDelay: '0.2s'}}>
-          {heroContent?.subtitle || "Crafting compelling commercials, ads, and marketing videos for the Creative Film Industry with unparalleled artistic vision and technical excellence."}
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up" style={{animationDelay: '0.4s'}}>
-          <Button 
-            onClick={scrollToPortfolio}
-            className="bg-[#00D4FF] hover:bg-[#00D4FF]/80 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-3"
-          >
-            <Play className="w-5 h-5" />
-            Watch Our Reel
-          </Button>
-          <Button 
-            onClick={scrollToContact}
-            variant="outline"
-            className="border-2 border-white/20 hover:border-[#00D4FF] text-white hover:text-[#00D4FF] px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
-          >
-            Let's Create
-          </Button>
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-2xl">
+          {/* Main Title */}
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8">
+            <span className="block">
+              {heroContent?.title || "Shaping bold brands"}
+            </span>
+            <span className="block text-white/90">
+              {heroContent?.subtitle || "for the digital age."}
+            </span>
+          </h1>
+          
+          {/* CTA Button */}
+          <div className="mt-8">
+            <Button
+              onClick={scrollToPortfolio}
+              variant="outline"
+              size="lg"
+              className="border-2 border-white text-white hover:bg-white hover:text-black px-6 py-3 text-base font-medium rounded-none uppercase tracking-wider transition-all duration-300"
+            >
+              View Projects
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </div>
       
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60 animate-bounce">
-        <ChevronDown className="w-8 h-8" />
+      {/* Small Link in Bottom Right */}
+      <div className="absolute bottom-8 right-8 z-10">
+        <a 
+          href="#about" 
+          className="text-white/60 hover:text-white text-sm underline transition-colors duration-300"
+        >
+          Browse our selection of over<br />
+          200+ top creative projects
+        </a>
       </div>
     </section>
   );
