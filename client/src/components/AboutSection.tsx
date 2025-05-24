@@ -7,19 +7,19 @@ export default function AboutSection() {
   });
 
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Testimonials Section */}
-        <div className="mb-20">
-          <p className="text-xs uppercase tracking-wider text-gray-500 mb-8">TESTIMONIALS</p>
+        <div className="mb-16">
+          <p className="text-xs uppercase tracking-wider text-gray-500 mb-6">TESTIMONIALS</p>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="space-y-4">
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" 
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" 
                   alt="Client" 
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="w-10 h-10 rounded-full object-cover"
                 />
                 <div>
                   <p className="font-medium text-sm">John Smith</p>
@@ -27,16 +27,16 @@ export default function AboutSection() {
                 </div>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
-                "The team delivered exceptional results that exceeded our expectations. Their attention to detail and creative vision transformed our brand story."
+                "The team delivered exceptional results that exceeded our expectations."
               </p>
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <img 
-                  src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face" 
+                  src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face" 
                   alt="Client" 
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="w-10 h-10 rounded-full object-cover"
                 />
                 <div>
                   <p className="font-medium text-sm">Sarah Johnson</p>
@@ -44,16 +44,16 @@ export default function AboutSection() {
                 </div>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
-                "Working with GrittyFlint was a game-changer for our campaign. The video content they created drove incredible engagement and results."
+                "Working with GrittyFlint was a game-changer for our campaign."
               </p>
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <img 
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face" 
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" 
                   alt="Client" 
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="w-10 h-10 rounded-full object-cover"
                 />
                 <div>
                   <p className="font-medium text-sm">Mike Davis</p>
@@ -61,7 +61,7 @@ export default function AboutSection() {
                 </div>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
-                "Professional, creative, and results-driven. The video production quality was outstanding and perfectly captured our brand essence."
+                "Professional, creative, and results-driven video production."
               </p>
             </div>
           </div>
