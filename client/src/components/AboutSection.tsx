@@ -1,85 +1,208 @@
 import { useQuery } from "@tanstack/react-query";
+import type { ContentSection } from "@shared/schema";
 
 export default function AboutSection() {
-  const { data: aboutContent } = useQuery({
+  const { data: aboutContent } = useQuery<ContentSection>({
     queryKey: ["/api/content/about"],
   });
 
-  const differentiators = [
-    {
-      icon: "fas fa-eye",
-      title: "Creative Vision",
-      description: "Pushing the boundaries of visual storytelling to deliver unforgettable results that captivate and convert.",
-      gradient: "cinematic-gradient"
-    },
-    {
-      icon: "fas fa-film",
-      title: "Industry Expertise",
-      description: "Deep understanding of the Creative Film Industry's unique needs and the latest production trends.",
-      gradient: "cinematic-gradient-alt"
-    },
-    {
-      icon: "fas fa-rocket",
-      title: "Results-Driven",
-      description: "Crafting content that not only looks stunning but achieves your strategic marketing objectives.",
-      gradient: "bg-gradient-to-r from-[#8B5CF6] to-[#FF6B35]"
-    },
-    {
-      icon: "fas fa-cogs",
-      title: "Cutting-Edge Technology",
-      description: "Utilizing the latest in film and post-production technology for superior quality and innovation.",
-      gradient: "cinematic-gradient"
-    }
-  ];
-
   return (
-    <section id="about" className="py-24 bg-[#1A1A1A]">
+    <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-black mb-8">
-              {aboutContent?.title || (
-                <>
-                  Why Partner with <span className="text-[#00D4FF]">Spectra Media</span>?
-                </>
-              )}
-            </h2>
-            <p className="text-xl text-[#A1A1AA] mb-12">
-              {aboutContent?.subtitle || "We don't just create videos – we craft cinematic experiences that resonate with audiences and deliver measurable results for your brand."}
-            </p>
-            
-            <div className="space-y-8">
-              {differentiators.map((item, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <div className={`w-12 h-12 ${item.gradient} rounded-lg flex items-center justify-center flex-shrink-0 mt-1`}>
-                    <i className={`${item.icon} text-white`}></i>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-[#A1A1AA]">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Testimonials Section */}
+        <div className="mb-20">
+          <p className="text-xs uppercase tracking-wider text-gray-500 mb-8">TESTIMONIALS</p>
           
-          <div className="relative">
-            <img 
-              src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000" 
-              alt="Professional film crew in action with high-end camera equipment and dramatic lighting setup" 
-              className="rounded-2xl shadow-2xl" 
-            />
-            
-            <div className="absolute -bottom-8 -left-8 cinematic-gradient rounded-xl p-6 backdrop-blur-sm">
-              <div className="text-3xl font-black">500+</div>
-              <div className="text-sm text-white/80">Projects Delivered</div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <img 
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" 
+                  alt="Client" 
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-medium text-sm">John Smith</p>
+                  <p className="text-xs text-gray-500">Creative Director</p>
+                </div>
+              </div>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                "The team delivered exceptional results that exceeded our expectations. Their attention to detail and creative vision transformed our brand story."
+              </p>
             </div>
             
-            <div className="absolute -top-8 -right-8 cinematic-gradient-alt rounded-xl p-6 backdrop-blur-sm">
-              <div className="text-3xl font-black">25+</div>
-              <div className="text-sm text-white/80">Industry Awards</div>
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <img 
+                  src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face" 
+                  alt="Client" 
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-medium text-sm">Sarah Johnson</p>
+                  <p className="text-xs text-gray-500">Marketing Lead</p>
+                </div>
+              </div>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                "Working with GrittyFlint was a game-changer for our campaign. The video content they created drove incredible engagement and results."
+              </p>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <img 
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face" 
+                  alt="Client" 
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-medium text-sm">Mike Davis</p>
+                  <p className="text-xs text-gray-500">Brand Manager</p>
+                </div>
+              </div>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                "Professional, creative, and results-driven. The video production quality was outstanding and perfectly captured our brand essence."
+              </p>
             </div>
           </div>
+        </div>
+
+        {/* Latest News Section */}
+        <div>
+          <h2 className="text-3xl md:text-4xl font-light text-black mb-12">latest news /</h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Row 1 */}
+            <div className="space-y-4">
+              <img 
+                src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=250&fit=crop" 
+                alt="News" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+              <div>
+                <p className="text-xs text-gray-500 mb-2">May 15, 2024</p>
+                <h3 className="font-medium text-sm mb-2">Behind the Scenes: Our Latest Commercial Production</h3>
+                <p className="text-xs text-gray-600">An inside look at the creative process behind our award-winning automotive commercial.</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <img 
+                src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=250&fit=crop" 
+                alt="News" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+              <div>
+                <p className="text-xs text-gray-500 mb-2">May 10, 2024</p>
+                <h3 className="font-medium text-sm mb-2">New Equipment Upgrade: Cinematic Excellence</h3>
+                <p className="text-xs text-gray-600">Investing in cutting-edge technology to deliver even more stunning visual narratives.</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <img 
+                src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=400&h=250&fit=crop" 
+                alt="News" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+              <div>
+                <p className="text-xs text-gray-500 mb-2">May 5, 2024</p>
+                <h3 className="font-medium text-sm mb-2">Documentary Series Wins Film Festival Award</h3>
+                <p className="text-xs text-gray-600">Our latest documentary project receives recognition at the International Film Festival.</p>
+              </div>
+            </div>
+
+            {/* Row 2 */}
+            <div className="space-y-4">
+              <img 
+                src="https://images.unsplash.com/photo-1518985384788-abcd8763e11c?w=400&h=250&fit=crop" 
+                alt="News" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+              <div>
+                <p className="text-xs text-gray-500 mb-2">April 28, 2024</p>
+                <h3 className="font-medium text-sm mb-2">Client Spotlight: Fashion Brand Transformation</h3>
+                <p className="text-xs text-gray-600">How we helped a luxury fashion brand redefine their visual identity through video.</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <img 
+                src="https://images.unsplash.com/photo-1574267432553-4b4628081c31?w=400&h=250&fit=crop" 
+                alt="News" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+              <div>
+                <p className="text-xs text-gray-500 mb-2">April 20, 2024</p>
+                <h3 className="font-medium text-sm mb-2">The Future of Video Marketing Trends</h3>
+                <p className="text-xs text-gray-600">Our predictions for the evolving landscape of video content and marketing strategies.</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <img 
+                src="https://images.unsplash.com/photo-1489599184881-02d5411f71e9?w=400&h=250&fit=crop" 
+                alt="News" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+              <div>
+                <p className="text-xs text-gray-500 mb-2">April 15, 2024</p>
+                <h3 className="font-medium text-sm mb-2">Music Video Production: Creative Collaboration</h3>
+                <p className="text-xs text-gray-600">Exploring the collaborative process between artists and directors in music video creation.</p>
+              </div>
+            </div>
+
+            {/* Row 3 */}
+            <div className="space-y-4">
+              <img 
+                src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=250&fit=crop" 
+                alt="News" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+              <div>
+                <p className="text-xs text-gray-500 mb-2">April 10, 2024</p>
+                <h3 className="font-medium text-sm mb-2">Post-Production Magic: Color Grading Insights</h3>
+                <p className="text-xs text-gray-600">The art and science behind creating mood and atmosphere through color grading techniques.</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <img 
+                src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=250&fit=crop" 
+                alt="News" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+              <div>
+                <p className="text-xs text-gray-500 mb-2">April 5, 2024</p>
+                <h3 className="font-medium text-sm mb-2">Location Scouting: Finding Perfect Settings</h3>
+                <p className="text-xs text-gray-600">How we discover and secure stunning locations that enhance storytelling impact.</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <img 
+                src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=400&h=250&fit=crop" 
+                alt="News" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+              <div>
+                <p className="text-xs text-gray-500 mb-2">March 30, 2024</p>
+                <h3 className="font-medium text-sm mb-2">Team Expansion: Welcome New Talent</h3>
+                <p className="text-xs text-gray-600">Introducing our newest team members and their expertise in cinematography and editing.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Quote Section */}
+        <div className="mt-20 text-center">
+          <p className="text-2xl md:text-3xl font-light text-gray-700 max-w-4xl mx-auto leading-relaxed">
+            At our core, we are<br />
+            storytellers. We believe that<br />
+            every brand has a unique and<br />
+            valuable story — it's about attention,<br />
+            word of mouth, and meaning.
+          </p>
         </div>
       </div>
     </section>
