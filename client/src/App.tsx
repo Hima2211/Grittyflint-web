@@ -20,6 +20,7 @@ function Router() {
         <>
           <Route path="/" component={Landing} />
           <Route path="/admin" component={AdminDashboard} />
+          <Route path="/client" component={ClientPortal} />
         </>
       )}
       <Route component={NotFound} />

@@ -6,6 +6,10 @@ import {
   blogPosts,
   testimonials,
   contactSubmissions,
+  clientProjects,
+  projectAssets,
+  projectFeedback,
+  projectMilestones,
   type User,
   type UpsertUser,
   type ContentSection,
@@ -20,6 +24,14 @@ import {
   type InsertTestimonial,
   type ContactSubmission,
   type InsertContactSubmission,
+  type ClientProject,
+  type InsertClientProject,
+  type ProjectAsset,
+  type InsertProjectAsset,
+  type ProjectFeedback,
+  type InsertProjectFeedback,
+  type ProjectMilestone,
+  type InsertProjectMilestone,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and } from "drizzle-orm";
@@ -72,6 +84,31 @@ export interface IStorage {
   createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission>;
   markContactSubmissionAsRead(id: number): Promise<void>;
   deleteContactSubmission(id: number): Promise<void>;
+
+  // Client projects
+  getClientProjects(clientId?: string): Promise<ClientProject[]>;
+  getClientProject(id: number): Promise<ClientProject | undefined>;
+  createClientProject(project: InsertClientProject): Promise<ClientProject>;
+  updateClientProject(id: number, project: Partial<InsertClientProject>): Promise<ClientProject>;
+  deleteClientProject(id: number): Promise<void>;
+
+  // Project assets
+  getProjectAssets(projectId: number): Promise<ProjectAsset[]>;
+  createProjectAsset(asset: InsertProjectAsset): Promise<ProjectAsset>;
+  updateProjectAsset(id: number, asset: Partial<InsertProjectAsset>): Promise<ProjectAsset>;
+  deleteProjectAsset(id: number): Promise<void>;
+
+  // Project feedback
+  getProjectFeedback(projectId: number): Promise<ProjectFeedback[]>;
+  createProjectFeedback(feedback: InsertProjectFeedback): Promise<ProjectFeedback>;
+  updateProjectFeedback(id: number, feedback: Partial<InsertProjectFeedback>): Promise<ProjectFeedback>;
+  deleteProjectFeedback(id: number): Promise<void>;
+
+  // Project milestones
+  getProjectMilestones(projectId: number): Promise<ProjectMilestone[]>;
+  createProjectMilestone(milestone: InsertProjectMilestone): Promise<ProjectMilestone>;
+  updateProjectMilestone(id: number, milestone: Partial<InsertProjectMilestone>): Promise<ProjectMilestone>;
+  deleteProjectMilestone(id: number): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -291,6 +328,106 @@ export class DatabaseStorage implements IStorage {
 
   async deleteContactSubmission(id: number): Promise<void> {
     await db.delete(contactSubmissions).where(eq(contactSubmissions.id, id));
+  }
+
+  // Client projects
+  async getClientProjects(clientId?: string): Promise<ClientProject[]> {
+    if (clientId) {
+      return await db.select().from(clientProjects).where(eq(clientProjects.clientId, clientId)).orderBy(desc(clientProjects.createdAt));
+    }
+    return await db.select().from(clientProjects).orderBy(desc(clientProjects.createdAt));
+  }
+
+  async getClientProject(id: number): Promise<ClientProject | undefined> {
+    const [project] = await db.select().from(clientProjects).where(eq(clientProjects.id, id));
+    return project;
+  }
+
+  async createClientProject(project: InsertClientProject): Promise<ClientProject> {
+    const [newProject] = await db.insert(clientProjects).values(project).returning();
+    return newProject;
+  }
+
+  async updateClientProject(id: number, project: Partial<InsertClientProject>): Promise<ClientProject> {
+    const [updatedProject] = await db
+      .update(clientProjects)
+      .set({ ...project, updatedAt: new Date() })
+      .where(eq(clientProjects.id, id))
+      .returning();
+    return updatedProject;
+  }
+
+  async deleteClientProject(id: number): Promise<void> {
+    await db.delete(clientProjects).where(eq(clientProjects.id, id));
+  }
+
+  // Project assets
+  async getProjectAssets(projectId: number): Promise<ProjectAsset[]> {
+    return await db.select().from(projectAssets).where(eq(projectAssets.projectId, projectId)).orderBy(desc(projectAssets.createdAt));
+  }
+
+  async createProjectAsset(asset: InsertProjectAsset): Promise<ProjectAsset> {
+    const [newAsset] = await db.insert(projectAssets).values(asset).returning();
+    return newAsset;
+  }
+
+  async updateProjectAsset(id: number, asset: Partial<InsertProjectAsset>): Promise<ProjectAsset> {
+    const [updatedAsset] = await db
+      .update(projectAssets)
+      .set(asset)
+      .where(eq(projectAssets.id, id))
+      .returning();
+    return updatedAsset;
+  }
+
+  async deleteProjectAsset(id: number): Promise<void> {
+    await db.delete(projectAssets).where(eq(projectAssets.id, id));
+  }
+
+  // Project feedback
+  async getProjectFeedback(projectId: number): Promise<ProjectFeedback[]> {
+    return await db.select().from(projectFeedback).where(eq(projectFeedback.projectId, projectId)).orderBy(desc(projectFeedback.createdAt));
+  }
+
+  async createProjectFeedback(feedback: InsertProjectFeedback): Promise<ProjectFeedback> {
+    const [newFeedback] = await db.insert(projectFeedback).values(feedback).returning();
+    return newFeedback;
+  }
+
+  async updateProjectFeedback(id: number, feedback: Partial<InsertProjectFeedback>): Promise<ProjectFeedback> {
+    const [updatedFeedback] = await db
+      .update(projectFeedback)
+      .set({ ...feedback, updatedAt: new Date() })
+      .where(eq(projectFeedback.id, id))
+      .returning();
+    return updatedFeedback;
+  }
+
+  async deleteProjectFeedback(id: number): Promise<void> {
+    await db.delete(projectFeedback).where(eq(projectFeedback.id, id));
+  }
+
+  // Project milestones
+  async getProjectMilestones(projectId: number): Promise<ProjectMilestone[]> {
+    return await db.select().from(projectMilestones).where(eq(projectMilestones.projectId, projectId)).orderBy(projectMilestones.sortOrder);
+  }
+
+  async createProjectMilestone(milestone: InsertProjectMilestone): Promise<ProjectMilestone> {
+    const [newMilestone] = await db.insert(projectMilestones).values(milestone).returning();
+    return newMilestone;
+  }
+
+  async updateProjectMilestone(id: number, milestone: Partial<InsertProjectMilestone>): Promise<ProjectMilestone> {
+    const [updatedMilestone] = await db
+      .update(projectMilestones)
+      .set(milestone)
+      .where(eq(projectMilestones.id, id))
+      .returning();
+    return updatedMilestone;
+  }
+
+  async deleteProjectMilestone(id: number): Promise<void> {
+    await db.delete(projectMilestones).where(eq(projectMilestones.id, id));
   }
 }
 
