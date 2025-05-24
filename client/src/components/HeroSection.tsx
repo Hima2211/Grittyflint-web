@@ -49,7 +49,7 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
         {/* Main Title */}
         <h1 className="text-6xl md:text-8xl lg:text-9xl font-thin text-white leading-tight tracking-wider uppercase">
-          <span className="block">{heroContent?.title || "PEAK STUDIO"}</span>
+          <span className="block">{heroContent?.title || "DIR. OPTIX"}</span>
         </h1>
       </div>
 
