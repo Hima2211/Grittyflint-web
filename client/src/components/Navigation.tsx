@@ -13,7 +13,7 @@ export default function Navigation({ showAdminLink }: NavigationProps) {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
       setIsMenuOpen(false);
     }
   };
@@ -23,56 +23,64 @@ export default function Navigation({ showAdminLink }: NavigationProps) {
       <div className="max-w-7xl mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <span className="text-xl font-light text-white tracking-wider">GrittyFlint</span>
+            <span className="text-xl font-bold text-white tracking-wider">
+              GrittyFlint
+            </span>
           </div>
-          
+
           <div className="hidden md:flex items-center space-x-6">
-            <button 
-              onClick={() => scrollToSection('home')} 
+            <button
+              onClick={() => scrollToSection("home")}
               className="text-white hover:text-[#00D4FF] transition-colors duration-300"
             >
               Home
             </button>
-            <button 
-              onClick={() => scrollToSection('services')} 
+            <button
+              onClick={() => scrollToSection("services")}
               className="text-[#A1A1AA] hover:text-[#00D4FF] transition-colors duration-300"
             >
               Services
             </button>
-            <button 
-              onClick={() => scrollToSection('portfolio')} 
+            <button
+              onClick={() => scrollToSection("portfolio")}
               className="text-[#A1A1AA] hover:text-[#00D4FF] transition-colors duration-300"
             >
               Portfolio
             </button>
-            <button 
-              onClick={() => scrollToSection('about')} 
+            <button
+              onClick={() => scrollToSection("about")}
               className="text-[#A1A1AA] hover:text-[#00D4FF] transition-colors duration-300"
             >
               About
             </button>
-            <button 
-              onClick={() => scrollToSection('contact')} 
+            <button
+              onClick={() => scrollToSection("contact")}
               className="text-[#A1A1AA] hover:text-[#00D4FF] transition-colors duration-300"
             >
               Contact
             </button>
             {showAdminLink && (
               <Link href="/admin">
-                <Button variant="outline" size="sm" className="border-[#00D4FF] text-[#00D4FF] hover:bg-[#00D4FF] hover:text-white">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-[#00D4FF] text-[#00D4FF] hover:bg-[#00D4FF] hover:text-white"
+                >
                   Admin
                 </Button>
               </Link>
             )}
           </div>
-          
 
-          
-          <button 
+          <button
             className="md:hidden text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X className="text-xl" /> : <Menu className="text-xl" />}
+            {isMenuOpen ? (
+              <X className="text-xl" />
+            ) : (
+              <Menu className="text-xl" />
+            )}
           </button>
         </div>
 
@@ -80,32 +88,32 @@ export default function Navigation({ showAdminLink }: NavigationProps) {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
             <div className="flex flex-col space-y-4 pt-4">
-              <button 
-                onClick={() => scrollToSection('home')} 
+              <button
+                onClick={() => scrollToSection("home")}
                 className="text-white hover:text-[#00D4FF] transition-colors duration-300 text-left"
               >
                 Home
               </button>
-              <button 
-                onClick={() => scrollToSection('services')} 
+              <button
+                onClick={() => scrollToSection("services")}
                 className="text-[#A1A1AA] hover:text-[#00D4FF] transition-colors duration-300 text-left"
               >
                 Services
               </button>
-              <button 
-                onClick={() => scrollToSection('portfolio')} 
+              <button
+                onClick={() => scrollToSection("portfolio")}
                 className="text-[#A1A1AA] hover:text-[#00D4FF] transition-colors duration-300 text-left"
               >
                 Portfolio
               </button>
-              <button 
-                onClick={() => scrollToSection('about')} 
+              <button
+                onClick={() => scrollToSection("about")}
                 className="text-[#A1A1AA] hover:text-[#00D4FF] transition-colors duration-300 text-left"
               >
                 About
               </button>
-              <button 
-                onClick={() => scrollToSection('contact')} 
+              <button
+                onClick={() => scrollToSection("contact")}
                 className="text-[#A1A1AA] hover:text-[#00D4FF] transition-colors duration-300 text-left"
               >
                 Contact
@@ -117,7 +125,6 @@ export default function Navigation({ showAdminLink }: NavigationProps) {
                   </span>
                 </Link>
               )}
-
             </div>
           </div>
         )}
