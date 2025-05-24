@@ -67,7 +67,10 @@ export const portfolioProjects = pgTable("portfolio_projects", {
   description: text("description"),
   thumbnailUrl: text("thumbnail_url"),
   videoUrl: text("video_url"),
-  category: varchar("category"), // 'commercial', 'brand', 'digital', etc.
+  category: varchar("category"), // 'commercial', 'music-video', 'documentary', 'brand', 'digital', etc.
+  tags: text("tags").array(), // ['automotive', 'luxury', 'lifestyle', etc.]
+  year: varchar("year"),
+  duration: varchar("duration"), // '30s', '1:30', etc.
   isActive: boolean("is_active").default(true),
   isFeatured: boolean("is_featured").default(false),
   sortOrder: serial("sort_order"),
@@ -117,6 +120,61 @@ export const contactSubmissions = pgTable("contact_submissions", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// Client projects table for project collaboration
+export const clientProjects = pgTable("client_projects", {
+  id: serial("id").primaryKey(),
+  title: varchar("title").notNull(),
+  description: text("description"),
+  clientId: varchar("client_id").references(() => users.id),
+  status: varchar("status").default("planning"), // 'planning', 'in-progress', 'review', 'completed'
+  budget: varchar("budget"),
+  deadline: timestamp("deadline"),
+  projectType: varchar("project_type"), // 'commercial', 'music-video', 'documentary', etc.
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Project files and assets
+export const projectAssets = pgTable("project_assets", {
+  id: serial("id").primaryKey(),
+  projectId: serial("project_id").references(() => clientProjects.id),
+  fileName: varchar("file_name").notNull(),
+  fileUrl: text("file_url").notNull(),
+  fileType: varchar("file_type"), // 'video', 'image', 'document', 'audio'
+  version: varchar("version").default("1.0"),
+  uploadedBy: varchar("uploaded_by").references(() => users.id),
+  isCurrentVersion: boolean("is_current_version").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Client feedback and comments
+export const projectFeedback = pgTable("project_feedback", {
+  id: serial("id").primaryKey(),
+  projectId: serial("project_id").references(() => clientProjects.id),
+  assetId: serial("asset_id").references(() => projectAssets.id),
+  userId: varchar("user_id").references(() => users.id),
+  comment: text("comment").notNull(),
+  timestamp: varchar("timestamp"), // For video timestamps like "1:23"
+  status: varchar("status").default("open"), // 'open', 'addressed', 'resolved'
+  priority: varchar("priority").default("medium"), // 'low', 'medium', 'high'
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Project milestones and timeline
+export const projectMilestones = pgTable("project_milestones", {
+  id: serial("id").primaryKey(),
+  projectId: serial("project_id").references(() => clientProjects.id),
+  title: varchar("title").notNull(),
+  description: text("description"),
+  dueDate: timestamp("due_date"),
+  isCompleted: boolean("is_completed").default(false),
+  completedAt: timestamp("completed_at"),
+  sortOrder: serial("sort_order"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 // Insert schemas for validation
 export const insertContentSectionSchema = createInsertSchema(contentSections).omit({
   id: true,
@@ -157,6 +215,28 @@ export const insertContactSubmissionSchema = createInsertSchema(contactSubmissio
   createdAt: true,
 });
 
+export const insertClientProjectSchema = createInsertSchema(clientProjects).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertProjectAssetSchema = createInsertSchema(projectAssets).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertProjectFeedbackSchema = createInsertSchema(projectFeedback).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertProjectMilestoneSchema = createInsertSchema(projectMilestones).omit({
+  id: true,
+  createdAt: true,
+});
+
 // Type exports
 export type UpsertUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
@@ -172,3 +252,13 @@ export type Testimonial = typeof testimonials.$inferSelect;
 export type InsertTestimonial = z.infer<typeof insertTestimonialSchema>;
 export type ContactSubmission = typeof contactSubmissions.$inferSelect;
 export type InsertContactSubmission = z.infer<typeof insertContactSubmissionSchema>;
+
+// Client portal types
+export type ClientProject = typeof clientProjects.$inferSelect;
+export type InsertClientProject = z.infer<typeof insertClientProjectSchema>;
+export type ProjectAsset = typeof projectAssets.$inferSelect;
+export type InsertProjectAsset = z.infer<typeof insertProjectAssetSchema>;
+export type ProjectFeedback = typeof projectFeedback.$inferSelect;
+export type InsertProjectFeedback = z.infer<typeof insertProjectFeedbackSchema>;
+export type ProjectMilestone = typeof projectMilestones.$inferSelect;
+export type InsertProjectMilestone = z.infer<typeof insertProjectMilestoneSchema>;

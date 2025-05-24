@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAuth } from "@/hooks/useAuth";
 import Landing from "@/pages/Landing";
 import AdminDashboard from "@/pages/AdminDashboard";
+import ClientPortal from "@/pages/ClientPortal";
 import NotFound from "@/pages/not-found";
 
 function Router() {
